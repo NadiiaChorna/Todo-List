@@ -45,13 +45,11 @@ class Task extends Component {
 
 	toggleTaskStatus = (e) => {
 		var task = {...this.props.task};
-		const {title, isDone, id} = task;
 		task.isDone = !task.isDone;
-		updateTask(77777, id, null, isDone)
+		updateTask(77777, task.id, null, task.isDone)
 			.then(data => {
 				this.props.toggleTaskStatus(task);
-				});
-		
+		});	
 	};
 
 	render() {
