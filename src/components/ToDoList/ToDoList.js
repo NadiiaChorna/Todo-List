@@ -3,7 +3,7 @@ import TodoListTaskCreater from './TodoListTaskCreater';
 import TasksList from './TasksList';
 import TodoListFooter from './TodoListFooter';
 
-// import {getTask} from './Services'
+import {getTask} from './Services'
 
 
 class ToDoList extends Component {
@@ -11,24 +11,23 @@ class ToDoList extends Component {
 		super();
 
 		this.state = {
-			tasks: [
-			{
-				
-				title: 'learn js',
-				isDone: false,
-				id: 1
-			},
-			{
-				
-				title: 'learn react',
-				isDone: false,
-				id: 2
-			}
-			],
+			tasks: [],
 			filter: 'all'
 		};
 
-
+		getTask(77777)
+		.then(tasksFromServer => {
+			var tasks = tasksFromServer.map((itemFromServer) => {
+				return {
+				id: itemFromServer.id,
+				title: itemFromServer.title,
+				isDone: itemFromServer.done
+				};
+			});
+			this.setState({
+				tasks: tasks
+			});	
+		});
 	}
 
 	createNewTask = (newTask) => {

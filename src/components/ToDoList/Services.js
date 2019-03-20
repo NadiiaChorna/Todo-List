@@ -31,12 +31,14 @@ export function getTask(widgetId){
 	return requestData(`${url}?widgetId=${widgetId}`, 'GET', null);
 }
 
-export function updateTask(widgetId, taskId, title, isDone) {
+export function updateTask(widgetId, taskId, title = null, isDone = null) {
 	const data = new URLSearchParams();
 	data.append('widgetId', widgetId);
 	data.append('taskId', taskId);
-	data.append('title', title);
-	data.append('done', isDone);
-
+	if(isDone != null){
+		data.append('done', isDone);
+	}else{
+		data.append('title', title);
+	}
 	return requestData(url, 'PUT', data);
 }
